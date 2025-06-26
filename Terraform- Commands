@@ -1,0 +1,168 @@
+Here is a **complete guide to Terraform commands** with **detailed explanations**, organized by purpose. This will help you confidently write, plan, deploy, and manage infrastructure as code using Terraform.
+
+---
+
+# 🌍 **Terraform Commands with Detailed Explanation**
+
+---
+
+## 🔧 1. **Basic Initialization and Setup**
+
+| Command               | Description                                                                                                                                                |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `terraform init`      | **Initializes** the Terraform working directory. Downloads provider plugins, sets up backend if configured. Run this first in every new or cloned project. |
+| `terraform version`   | Shows the Terraform CLI version and provider versions. Useful for compatibility.                                                                           |
+| `terraform providers` | Lists providers used in the configuration and their versions.                                                                                              |
+
+---
+
+## 📋 2. **Validation and Formatting**
+
+| Command                | Description                                                                                               |
+| ---------------------- | --------------------------------------------------------------------------------------------------------- |
+| `terraform validate`   | Checks syntax and internal consistency of the config files, without accessing cloud providers.            |
+| `terraform fmt`        | Automatically formats `.tf` files to follow Terraform’s style guide. Use `-recursive` for subdirectories. |
+| `terraform fmt -check` | Returns non-zero if files are not properly formatted (used in CI).                                        |
+
+---
+
+## 🔍 3. **Plan and Preview**
+
+| Command                           | Description                                                                                            |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `terraform plan`                  | Creates an **execution plan** showing what changes will be made. Doesn’t apply them. Good for dry-run. |
+| `terraform plan -out=plan.tfplan` | Saves the plan to a binary file that can be applied later using `terraform apply`.                     |
+| `terraform show`                  | Displays a human-readable output of the plan or state file.                                            |
+
+---
+
+## 🚀 4. **Apply and Deployment**
+
+| Command                         | Description                                                                             |
+| ------------------------------- | --------------------------------------------------------------------------------------- |
+| `terraform apply`               | Applies the configuration and creates/updates the infrastructure. Prompts for approval. |
+| `terraform apply plan.tfplan`   | Applies a previously saved execution plan (safe and consistent).                        |
+| `terraform apply -auto-approve` | Skips approval prompt—use cautiously in CI/CD pipelines.                                |
+
+---
+
+## 🔄 5. **Destroy Infrastructure**
+
+| Command                                      | Description                                                                     |
+| -------------------------------------------- | ------------------------------------------------------------------------------- |
+| `terraform destroy`                          | Destroys the infrastructure defined in your `.tf` files.                        |
+| `terraform destroy -target=aws_instance.web` | Destroys a **specific resource** only. Useful for debugging or partial cleanup. |
+| `terraform destroy -auto-approve`            | Skips interactive approval prompt.                                              |
+
+---
+
+## 🧱 6. **Resource Targeting**
+
+| Command                                          | Description                                |
+| ------------------------------------------------ | ------------------------------------------ |
+| `terraform plan -target=aws_s3_bucket.mybucket`  | Only plan changes for a specific resource. |
+| `terraform apply -target=aws_s3_bucket.mybucket` | Apply only targeted resource.              |
+
+---
+
+## 🗂️ 7. **State Management**
+
+| Command                           | Description                                                        |
+| --------------------------------- | ------------------------------------------------------------------ |
+| `terraform state list`            | Lists all resources tracked in the state file.                     |
+| `terraform state show <resource>` | Shows detailed info for a specific resource.                       |
+| `terraform state rm <resource>`   | Removes resource from state **without deleting** it from cloud.    |
+| `terraform state mv <old> <new>`  | Moves or renames resources in state file. Useful when refactoring. |
+
+---
+
+## 📁 8. **Workspace Management**
+
+| Command                          | Description                                      |
+| -------------------------------- | ------------------------------------------------ |
+| `terraform workspace list`       | Lists all workspaces (default, dev, prod, etc.). |
+| `terraform workspace new dev`    | Creates a new workspace named `dev`.             |
+| `terraform workspace select dev` | Switches to the `dev` workspace.                 |
+| `terraform workspace delete dev` | Deletes the specified workspace.                 |
+
+---
+
+## 🔑 9. **Environment and Variable Management**
+
+| Command                                   | Description                                              |
+| ----------------------------------------- | -------------------------------------------------------- |
+| `terraform apply -var="region=us-west-1"` | Passes variable from CLI.                                |
+| `terraform apply -var-file="dev.tfvars"`  | Loads multiple variables from a file.                    |
+| `TF_VAR_region=us-west-1 terraform apply` | Environment variable method for setting input variables. |
+
+---
+
+## ☁️ 10. **Remote Backend Commands**
+
+| Command                                               | Description                                        |
+| ----------------------------------------------------- | -------------------------------------------------- |
+| `terraform init -backend-config="bucket=my-tf-state"` | Passes custom backend config during init.          |
+| `terraform backend migrate`                           | Migrates local state to configured remote backend. |
+
+---
+
+## 🧪 11. **Debugging and Advanced**
+
+| Command                        | Description                                                                    |
+| ------------------------------ | ------------------------------------------------------------------------------ |
+| `terraform graph`              | Generates a DOT graph of the resource dependencies. Useful for visualization.  |
+| `terraform console`            | Opens an interactive console to inspect resources, variables, and expressions. |
+| `terraform output`             | Shows values defined in `output` blocks.                                       |
+| `terraform output -json`       | Same output in JSON format—great for automation and scripting.                 |
+| `TF_LOG=DEBUG terraform apply` | Enables detailed debug logs (set to TRACE/DEBUG/INFO/WARN/ERROR).              |
+
+---
+
+## 📦 12. **Command Cheat Sheet**
+
+| Task               | Command                         |
+| ------------------ | ------------------------------- |
+| Initialize project | `terraform init`                |
+| Validate syntax    | `terraform validate`            |
+| Preview changes    | `terraform plan`                |
+| Apply changes      | `terraform apply`               |
+| Format code        | `terraform fmt -recursive`      |
+| Destroy infra      | `terraform destroy`             |
+| Use variables      | `-var`, `-var-file`, `TF_VAR_*` |
+| Manage state       | `terraform state` commands      |
+| Switch environment | `terraform workspace` commands  |
+
+---
+
+## 💡 Example Flow
+
+```bash
+# Step 1: Initialize
+terraform init
+
+# Step 2: Format and validate
+terraform fmt
+terraform validate
+
+# Step 3: Preview
+terraform plan -out=tfplan
+
+# Step 4: Apply
+terraform apply tfplan
+
+# Step 5: Check Output
+terraform output
+
+# Step 6: Clean up
+terraform destroy
+```
+
+---
+
+Would you like:
+
+1. This guide as a **PDF**?
+2. A **practical project example** using EC2, S3, VPC, etc.?
+3. Commands for **Terraform with modules and backends**?
+
+Let me know what you'd like next!
